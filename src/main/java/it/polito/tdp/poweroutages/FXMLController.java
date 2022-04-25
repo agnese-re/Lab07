@@ -5,16 +5,21 @@
 package it.polito.tdp.poweroutages;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 import it.polito.tdp.poweroutages.model.Model;
 import it.polito.tdp.poweroutages.model.Nerc;
 import it.polito.tdp.poweroutages.model.PowerOutage;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLController {
 
@@ -36,6 +41,29 @@ public class FXMLController {
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
 
+    
+    /* *** VISUALIZATION WITH TABLEVIEW *** */
+    @FXML
+    private TableView<PowerOutage> tblPowerOutages;		// tableView ospita PowerOutage
+    
+    @FXML
+    private TableColumn<PowerOutage, Integer> colCustomers;
+
+    @FXML
+    private TableColumn<PowerOutage, LocalDateTime> colDateEventBegan;
+
+    @FXML
+    private TableColumn<PowerOutage, LocalDateTime> colDateEventFinished;
+
+    @FXML
+    private TableColumn<PowerOutage, Integer> colDurationHours;
+
+    @FXML
+    private TableColumn<PowerOutage, Integer> colYear;
+    
+    /* ******************************** *** */
+    
+    
     private Model model;
     
     @FXML
@@ -74,6 +102,9 @@ public class FXMLController {
     	} else
     		txtResult.setText("Per favore, scegli un NERC"); 
     	*/
+    	
+    	tblPowerOutages.setItems(
+    			FXCollections.observableArrayList(model.miglioreSottoinsieme(nercSelected, numYears, numHours)));
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -82,6 +113,20 @@ public class FXMLController {
         assert txtYears != null : "fx:id=\"txtYears\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtHours != null : "fx:id=\"txtHours\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+        
+        assert colCustomers != null : "fx:id=\"colCustomers\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert colDateEventBegan != null : "fx:id=\"colDateEventBegan\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert colDateEventFinished != null : "fx:id=\"colDateEventFinished\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert colDurationHours != null : "fx:id=\"colDurationHours\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert colYear != null : "fx:id=\"colYear\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert tblPowerOutages != null : "fx:id=\"tblPowerOutages\" was not injected: check your FXML file 'Scene.fxml'.";
+        
+        /* *** PER RAPPRESENTARE CELLE TABLE VIEW */
+        this.colYear.setCellValueFactory(new PropertyValueFactory<PowerOutage,Integer>("annoPO"));
+        this.colDateEventBegan.setCellValueFactory(new PropertyValueFactory<PowerOutage,LocalDateTime>("dateEventBegan"));
+        this.colDateEventFinished.setCellValueFactory(new PropertyValueFactory<PowerOutage,LocalDateTime>("dateEventFinished"));
+        this.colDurationHours.setCellValueFactory(new PropertyValueFactory<PowerOutage,Integer>("durataInOre"));
+        this.colCustomers.setCellValueFactory(new PropertyValueFactory<PowerOutage,Integer>("customersAffected"));
         
         // Utilizzare questo font per incolonnare correttamente i dati;
         txtResult.setStyle("-fx-font-family: monospace");

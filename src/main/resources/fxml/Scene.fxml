@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.poweroutages.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.poweroutages.FXMLController">
    <top>
       <Label text="Lab07 - TdP Insurance Unit" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -63,7 +65,7 @@
                                     <Insets right="40.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField fx:id="txtHours" prefHeight="25.0" prefWidth="148.0" />
+                              <TextField fx:id="txtHours" onAction="#doRun" prefHeight="25.0" prefWidth="148.0" />
                            </children>
                         </HBox>
                         <Button mnemonicParsing="false" onAction="#doRun" prefHeight="25.0" prefWidth="183.0" text="Worst Case Analysis">
@@ -81,11 +83,23 @@
                   <Insets left="20.0" right="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
-            <TextArea fx:id="txtResult" prefHeight="200.0" prefWidth="200.0">
+            <TextArea fx:id="txtResult" editable="false" prefHeight="500.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextArea>
+            <TableView fx:id="tblPowerOutages" prefHeight="600.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="colYear" prefWidth="75.0" style="-fx-alignment: CENTER;" text="Year" />
+                <TableColumn fx:id="colDateEventBegan" prefWidth="120.79999542236328" style="-fx-alignment: CENTER;" text="DateBegan" />
+                  <TableColumn fx:id="colDateEventFinished" prefWidth="126.39988708496094" style="-fx-alignment: CENTER;" text="DateFinished" />
+                  <TableColumn fx:id="colDurationHours" prefWidth="108.800048828125" style="-fx-alignment: CENTER;" text="Duration (HH)" />
+                  <TableColumn fx:id="colCustomers" prefWidth="152.80001831054688" style="-fx-alignment: CENTER;" text="NumberCustomers" />
+              </columns>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </VBox.margin>
+            </TableView>
          </children>
       </VBox>
    </center>
