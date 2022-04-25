@@ -40,8 +40,7 @@ public class Model {
 		List<PowerOutage> parziale = new ArrayList<PowerOutage>();
 		ricercaMigliore(parziale,0,years,hours);
 		
-		return migliore;
-		
+		return migliore;	
 	}
 
 	/* Metodo ricorsivo */
@@ -58,10 +57,14 @@ public class Model {
 				migliore = new ArrayList<PowerOutage>(parziale);
 			}
 		}
-		// genero i sottoproblemi
+		
+		// livello ridotto a scegliere se aggiungere o non aggiungere (2 possibilita') 
+		// provo ad aggiungere 
 		parziale.add(allPoweroutages.get(livello));
 		ricercaMigliore(parziale,livello+1,years,hours);
+		// provo a non aggiungere
 		parziale.remove(allPoweroutages.get(livello));
+		ricercaMigliore(parziale,livello+1,years,hours);
 		
 	}
 	
@@ -82,6 +85,9 @@ public class Model {
 		int sommaHoursDisservizio = 0;
 		int differenzaInAnni = 0;
 		
+		if(parziale.size() == 0)	// prima iterazione, livello 0
+			return true;
+		
 		// Controllo sul numero di ore di disservizio -> minore di hours inserito dall'utente
 		for(int indice = 0; indice < parziale.size(); indice++)
 			sommaHoursDisservizio += parziale.get(indice).getDurataInOre();
@@ -98,4 +104,28 @@ public class Model {
 		
 		return true;	// soluzione valida
 	}
+	
+	/* Metodo che ritorna il numero di clienti coinvolti nel sottoinsieme migliore */
+	public int numClientiMigliore() {
+		
+		int numClienti = 0;
+		
+		for(int indice = 0; indice < migliore.size(); indice++)
+			numClienti += migliore.get(indice).getCustomersAffected();
+		
+		return numClienti;
+	}
+	
+	/* Metodo che ritorna il numero di ore di disservizio totali nel sottoinsieme migliore */
+	public int numHoursMigliore() {
+		
+		int numHours = 0;
+		
+		for(int indice = 0; indice < migliore.size(); indice++)
+			numHours += migliore.get(indice).getDurataInOre();
+		
+		return numHours;
+	}
+	
+	
 }

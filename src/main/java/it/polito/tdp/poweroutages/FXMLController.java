@@ -59,9 +59,11 @@ public class FXMLController {
     		txtResult.setText("Inserisci valori validi nei campi Max Years e Max Hours (ONLY NUMBERS)");
     	}
     	
-    	List<PowerOutage> powerOutages = 
+    	List<PowerOutage> powerOutagesMigliore = 
     			model.miglioreSottoinsieme(nercSelected, numYears, numHours);
-    	for(PowerOutage po: powerOutages)
+    	txtResult.appendText("Tot people affected: " + model.numClientiMigliore() + "\n");
+    	txtResult.appendText("Tot hours of outage: " + model.numHoursMigliore() + "\n");
+    	for(PowerOutage po: powerOutagesMigliore)
     		txtResult.appendText(po.toString() + "\n");
     	
     	/*	SOLO PER TESTARE COLLEGAMENTO DAO - MODEL - CONTROLLER
