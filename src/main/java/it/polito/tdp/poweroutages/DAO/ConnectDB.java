@@ -19,12 +19,15 @@ public class ConnectDB {
 	private static final String jdbcURL = "jdbc:mysql://localhost/poweroutages";
 	private static HikariDataSource ds;
 	
+	/* pool di connessioni. Ogni qualvolta si necessita di interrogare il database si chiede in prestito
+	 	una connessione tra quelle gia' esistenti e, una volta effettuata l'operazione, questa viene rila-
+	 	sciata. conn.close() serve per rilasciare la connessione, non per chiuderla */
 	public static Connection getConnection() {
 		if(ds == null) {
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(jdbcURL);
 			config.setUsername("root");
-			config.setPassword("root");
+			config.setPassword("TdP_2022");
 			
 			config.addDataSourceProperty("cachePrepStmts", true);
 			config.addDataSourceProperty("prepStmtChacheSize", 250);

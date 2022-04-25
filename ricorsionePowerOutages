@@ -1,0 +1,24 @@
+INPUT
+	- NERC (North American Electric Reliability Corporation) selezionato dall'utente
+	- massimo numero di anni X scelte dall'utente
+	- massime ore di disservizio Y scelte dall'utente
+	
+OUTPUT
+	- sottoinsieme di poweroutages tali che:
+		- numero totale di ore di disservizio dei blackout inseriti nel sottoinsime sia minore di Y (< Y)
+		- differenza tra anno evento piu' recente e anno evento piu' vecchio minore di X (< X)
+		- massimo numero di clienti coinvolti (PB DI OTTIMIZZAZIONE -> RICERCA DI UN MASSIMO)
+		
+ALGORITMO
+Scorrere la tabella di poweroutages e, per ognuno di essi, decidere se inserire o meno nel sottoinsieme.
+Ad ogni livello ho due scelte possibili: aggiungo o non aggiungo. Al livello 1 decido se aggiungere al 
+sottoinsieme il blackout nella prima riga della tabella poweroutages, al livello 2 decido se aggiungere
+il blackout nella seconda riga etc. 
+
+*** LIVELLO COME INDICE DELLA LISTA DI BLACKOUT DA AGGIUNGERE O NO ***
+
+- CASI TERMINALI
+	- ho finito i poweroutages disponibili (livello == poweroutages.size())
+	- le ore di disservizio del sottoinsieme ottenuto sono >= Y (soluzione non valida)
+	- le ore di disservizio del sottoinsieme sono < Y (soluzione valida) -> controllo se il 
+		numero di clienti coinvolti e' massimo (pb di ottimizzazione, ricerca del massimo).

@@ -2,15 +2,17 @@ package it.polito.tdp.poweroutages.model;
 
 public class Nerc {
 
-	
+	/* ATTRIBUTI CLASSE NERC */
 	private int id;
 	private String value;
 
+	/* COSTRUTTORE PARAMETRIZZATO */
 	public Nerc(int id, String value) {
 		this.id = id;
 		this.value = value;
 	}
 
+	/* METODI GETTER/SETTER */
 	public int getId() {
 		return id;
 	}
@@ -55,6 +57,5 @@ public class Nerc {
 		builder.append(value);
 		return builder.toString();
 	}
-	
 
 }

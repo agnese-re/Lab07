@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.poweroutages.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.poweroutages.FXMLController">
    <top>
       <Label text="Lab07 - TdP Insurance Unit" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -58,7 +58,7 @@
                         </HBox>
                         <HBox prefHeight="83.0" prefWidth="250.0">
                            <children>
-                              <Label text="Max hours">
+                              <Label text="Max Hours">
                                  <HBox.margin>
                                     <Insets right="40.0" />
                                  </HBox.margin>
